@@ -1,6 +1,16 @@
 // Get user input
 function getPlayerSelection() {
+  let playerSelection;
+  let correctPlayerSelection = false;
+  
+  while (!correctPlayerSelection){
+    playerSelection = prompt('Choose your fighter').toLowerCase();
+    if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors") {
+      correctPlayerSelection = true;
+    }
+  }
 
+  return playerSelection;
 }
 
 // Randomize and get computer's turn
