@@ -49,5 +49,28 @@ function playRound(playerSelection, computerSelection) {
 
 // Play a five round match of rock paper scissors and keeps score
 function playGame() {
+  let playerScore = 0;
+  let computerScore = 0;
+  for (let i = 0; i < 5; i++) {
+    // Call functions, do not pass then as functions
+    let winner = playRound(getPlayerSelection(), getComputerSelection());
+    if (winner === "computer") {
+      computerScore++;
+    } else if (winner === "player") {
+      playerScore++;
+    }
+  }
 
+  if (playerScore > computerScore) {
+    console.log(`Player is the winner! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`)
+    return "player";
+  } else if (playerScore < computerScore) {
+    console.log(`Computer is the winner! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`)
+    return "computer";
+  } else {
+    console.log(`It's a tie! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`)
+    return "tie";
+  }
 }
+
+playGame();
