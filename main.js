@@ -5,7 +5,21 @@ function getPlayerSelection() {
 
 // Randomize and get computer's turn
 function getComputerSelection() {
+  let option = Math.floor(Math.random() * 3);
+  
+  switch (option) {
+    case 0:
+      return "rock";
+      break;
+  
+    case 1:
+      return "paper";
+      break;
 
+    case 2:
+      return "scissors";
+      break;
+  }
 }
 
 // Play one round
