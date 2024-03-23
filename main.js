@@ -20,18 +20,15 @@ function listenToPlayerButtons(event) {
   switch (event.target.id) {
     case 'buttonChooseRock':
       playRound(ROCK, getComputerSelection());
-      return;
+      break;
       
     case 'buttonChoosePaper':
       playRound(PAPER, getComputerSelection());
-      return;
+      break;
 
     case 'buttonChooseScissors':
       playRound(SCISSORS, getComputerSelection());
-      return;
-
-    default:
-      return;
+      break;
   }
 }
 
