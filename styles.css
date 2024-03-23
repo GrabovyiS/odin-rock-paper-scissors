@@ -1,0 +1,21 @@
+#result {
+  font-weight: 700;
+  text-align: center;
+  font-size: 40px;
+  margin: 64px;
+}
+
+#playerButtons {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#playerButtons button {
+  width: 200px;
+  padding: 24px;
+  color: red;
+  background-color: white;
+  border: 3px solid black;
+  font-size: 40px;
+  font-weight: bold;
+}

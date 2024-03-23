@@ -1,16 +1,38 @@
-// Get user input
-function getPlayerSelection() {
-  let playerSelection;
-  let correctPlayerSelection = false;
-  
-  while (!correctPlayerSelection){
-    playerSelection = prompt('Choose your fighter').toLowerCase();
-    if (playerSelection === "rock" || playerSelection === "paper" || playerSelection === "scissors") {
-      correctPlayerSelection = true;
-    }
-  }
+let playerScore = 0;
+let computerScore = 0;
+let numberOfRounds = 0;
 
-  return playerSelection;
+const ROCK = 'rock';
+const PAPER = 'paper';
+const SCISSORS = 'scissors';
+
+const buttonChooseRock = document.querySelector('#buttonChooseRock');
+const buttonChoosePaper = document.querySelector('#buttonChoosePaper');
+const buttonChooseScissors = document.querySelector('#buttonChooseScissors');
+
+const playerButtons = document.querySelector('#playerButtons');
+const resultOutput = document.querySelector('#result');
+
+playerButtons.addEventListener('click', listenToPlayerButtons);
+
+// Get user input
+function listenToPlayerButtons(event) {
+  switch (event.target.id) {
+    case 'buttonChooseRock':
+      playRound(ROCK, getComputerSelection());
+      return;
+      
+    case 'buttonChoosePaper':
+      playRound(PAPER, getComputerSelection());
+      return;
+
+    case 'buttonChooseScissors':
+      playRound(SCISSORS, getComputerSelection());
+      return;
+
+    default:
+      return;
+  }
 }
 
 // Randomize and get computer's turn
@@ -19,58 +41,51 @@ function getComputerSelection() {
 
   switch (option) {
     case 0:
-      return "rock";
+      return 'rock';
       break;
   
     case 1:
-      return "paper";
+      return 'paper';
       break;
 
     case 2:
-      return "scissors";
+      return 'scissors';
       break;
   }
 }
 
-// Play one round
 function playRound(playerSelection, computerSelection) {
-  if (playerSelection === computerSelection) {
-    return "tie";
-  }
+  numberOfRounds++;
 
-  if (playerSelection === "rock" && computerSelection === "scissors" ||
-      playerSelection === "scissors" && computerSelection === "paper" ||
-      playerSelection === "paper" && computerSelection === "rock") {
-      return "player";
+  if ((playerSelection === 'rock' && computerSelection === 'scissors' ||
+      playerSelection === 'scissors' && computerSelection === 'paper' ||
+      playerSelection === 'paper' && computerSelection === 'rock') && 
+      playerSelection !== computerSelection) {
+    playerScore++;
+  } else if (playerSelection !== computerSelection) {
+    computerScore++;
   }
-
-  return "computer" 
+  
+  resultOutput.textContent = `Player score: ${playerScore} Computer score: ${computerScore}`;
+  
+  checkEndOfGame(playerScore, computerScore);
 }
 
 // Play a five round match of rock paper scissors and keeps score
-function playGame() {
-  let playerScore = 0;
-  let computerScore = 0;
-  for (let i = 0; i < 5; i++) {
-    // Call functions, do not pass then as functions
-    let winner = playRound(getPlayerSelection(), getComputerSelection());
-    if (winner === "computer") {
-      computerScore++;
-    } else if (winner === "player") {
-      playerScore++;
-    }
+function checkEndOfGame(playerScore, computerScore) {
+  if (playerScore < 5 && computerScore < 5) {
+    return;
   }
 
   if (playerScore > computerScore) {
-    console.log(`Player is the winner! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`)
-    return "player";
+    resultOutput.textContent = `Player is the winner! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`;
+    return 'player';
   } else if (playerScore < computerScore) {
-    console.log(`Computer is the winner! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`)
-    return "computer";
+    resultOutput.textContent = `Computer is the winner! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`;
+    return 'computer';
   } else {
-    console.log(`It's a tie! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`)
-    return "tie";
+    resultOutput.textContent = `It's a tie! the score is: \nplayer - ${playerScore} \ncomputer - ${computerScore}`;
+    return 'tie';
   }
 }
 
-playGame();
